@@ -1,4 +1,4 @@
-import 'package:crypto/core/theme/app_colors.dart';
+import 'package:crypto_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingItem extends StatelessWidget {

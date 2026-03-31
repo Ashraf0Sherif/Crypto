@@ -1,4 +1,5 @@
-import 'package:crypto/core/theme/app_colors.dart';
+import 'package:crypto_app/core/theme/app_colors.dart';
+import 'package:crypto_app/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
 import '../../onboarding/presentation/screens/onboarding_screen.dart';
@@ -37,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ],
           ),
         ),
-        child: Center(child: Image.asset('assets/images/splash.png')),
+        child: Center(child: Assets.images.splash.image()),
       ),
     );
   }
