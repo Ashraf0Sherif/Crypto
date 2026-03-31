@@ -4,11 +4,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton({
-    super.key,
-    required this.text,
-    required this.onTap,
-  });
+  const AppButton({super.key, required this.text, required this.onTap});
 
   final String text;
   final VoidCallback onTap;
@@ -41,7 +37,7 @@ class AppButton extends StatelessWidget {
           child: Text(
             text,
             style: AppTextStyles.titleMd.copyWith(
-              color: AppColors.onPrimary,
+              color: AppColors.white,
               fontWeight: FontWeight.w700,
             ),
           ),
