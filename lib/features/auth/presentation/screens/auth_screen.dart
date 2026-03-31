@@ -38,13 +38,14 @@ class _AuthScreenState extends State<AuthScreen> {
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.primaryContainer.withValues(alpha: 0.06),
-                blurRadius: 200,
-                offset: const Offset(100, -40),
-              ),
-            ],
+            gradient: RadialGradient(
+              center: Alignment.topRight,
+              radius: 1.2,
+              colors: [
+                AppColors.primaryContainer.withValues(alpha: 0.2),
+                AppColors.primaryContainer.withValues(alpha: 0.0),
+              ],
+            ),
           ),
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
