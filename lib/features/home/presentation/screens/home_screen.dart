@@ -1,24 +1,15 @@
+import 'package:crypto_app/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_text_styles.dart';
-import '../../../../gen/assets.gen.dart';
 import '../../data/models/coin_data.dart';
 import '../widgets/action_card.dart';
 import '../widgets/coin_section.dart';
 import '../widgets/home_top_bar.dart';
 import '../widgets/nav_grid.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentTab = 0;
 
   final List<CoinData> _recentCoins = const [
     CoinData(
@@ -72,122 +63,58 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const HomeTopBar(),
-              const SizedBox(height: 16),
-              const NavGrid(),
-              const SizedBox(height: 24),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    ActionCard(
-                      icon: Icons.rocket_launch_rounded,
-                      title: 'P2P Trading',
-                      subtitle: 'Bank Transfer, Paypal Revolut...',
-                      onTap: () {},
+      body: Stack(
+        children: [
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 120),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const HomeTopBar(),
+                  const SizedBox(height: 16),
+                  const NavGrid(),
+                  const SizedBox(height: 24),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        ActionCard(
+                          icon: Icons.rocket_launch_rounded,
+                          title: 'P2P Trading',
+                          subtitle: 'Bank Transfer, Paypal Revolut...',
+                          useGradientBackground: true,
+                          onTap: () {},
+                        ),
+                        const SizedBox(height: 16),
+                        ActionCard(
+                          icon: Icons.credit_card_rounded,
+                          title: 'Credit/Debit Card',
+                          subtitle: 'Visa, Mastercard',
+                          useGradientBackground: false,
+                          onTap: () {},
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 12),
-                    ActionCard(
-                      icon: Icons.credit_card_rounded,
-                      title: 'Credit/Debit Card',
-                      subtitle: 'Visa, Mastercard',
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+                  ),
+
+                  const SizedBox(height: 32),
+                  CoinSection(title: 'Recent Coin', coins: _recentCoins),
+                  const SizedBox(height: 24),
+                  CoinSection(title: 'Top Coins', coins: _topCoins),
+                  const SizedBox(height: 24),
+                ],
               ),
-              const SizedBox(height: 32),
-              CoinSection(title: 'Recent Coin', coins: _recentCoins),
-              const SizedBox(height: 24),
-              CoinSection(title: 'Top Coins', coins: _topCoins),
-              const SizedBox(height: 24),
-            ],
+            ),
           ),
-        ),
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          border: Border(
-            top: BorderSide(color: AppColors.ghostBorder, width: 1),
+          Positioned(
+            left: 20,
+            right: 20,
+            bottom: 24,
+            child: CustomBottomNavBar(),
           ),
-        ),
-        child: BottomNavigationBar(
-          currentIndex: _currentTab,
-          onTap: (index) => setState(() => _currentTab = index),
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          selectedItemColor: AppColors.primary,
-          unselectedItemColor: AppColors.onSurfaceMuted,
-          selectedLabelStyle: AppTextStyles.labelSm.copyWith(
-            color: AppColors.primary,
-            fontWeight: FontWeight.w600,
-          ),
-          unselectedLabelStyle: AppTextStyles.labelSm,
-          items: [
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.home.path, width: 22, height: 22, colorFilter: const ColorFilter.mode(AppColors.onSurfaceMuted, BlendMode.srcIn)),
-              ),
-              activeIcon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.home.path, width: 32, height: 32, colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn)),
-              ),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.market.path, width: 22, height: 22, colorFilter: const ColorFilter.mode(AppColors.onSurfaceMuted, BlendMode.srcIn)),
-              ),
-              activeIcon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.market.path, width: 32, height: 32, colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn)),
-              ),
-              label: 'Markets',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.trades.path, width: 22, height: 22, colorFilter: const ColorFilter.mode(AppColors.onSurfaceMuted, BlendMode.srcIn)),
-              ),
-              activeIcon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.trades.path, width: 32, height: 32, colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn)),
-              ),
-              label: 'Trades',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.activity.path, width: 22, height: 22, colorFilter: const ColorFilter.mode(AppColors.onSurfaceMuted, BlendMode.srcIn)),
-              ),
-              activeIcon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.activity.path, width: 32, height: 32, colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn)),
-              ),
-              label: 'Activity',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.wallet.path, width: 22, height: 22, colorFilter: const ColorFilter.mode(AppColors.onSurfaceMuted, BlendMode.srcIn)),
-              ),
-              activeIcon: Padding(
-                padding: const EdgeInsets.only(bottom: 4),
-                child: SvgPicture.asset(Assets.svgs.wallet.path, width: 32, height: 32, colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn)),
-              ),
-              label: 'Wallets',
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
