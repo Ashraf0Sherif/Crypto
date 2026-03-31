@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
 import '../../features/splash/presentation/splash_screen.dart';
@@ -28,6 +29,11 @@ class AppRouter {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => const AuthScreen(),
+        );
+      case Routes.home:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const HomeScreen(),
         );
       default:
         return MaterialPageRoute(
