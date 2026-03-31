@@ -117,7 +117,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 AppButton(
                   text: _isSignIn ? 'Sign in' : 'Sign up',
                   onTap: () => context.pushNamedAndRemoveUntil(
-                    Routes.home,
+                    Routes.nav,
                     predicate: (route) => false,
                   ),
                 ),

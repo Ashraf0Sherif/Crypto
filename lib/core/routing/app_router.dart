@@ -1,6 +1,8 @@
+import 'package:crypto_app/features/bottom_nav/presentation/bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/bottom_nav/logic/bottom_nav_cubit.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 import '../../features/settings/presentation/screens/settings_screen.dart';
 import '../../features/splash/presentation/splash_screen.dart';
@@ -30,10 +32,13 @@ class AppRouter {
           settings: settings,
           builder: (_) => const AuthScreen(),
         );
-      case Routes.home:
+      case Routes.nav:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const HomeScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => BottomNavCubit(),
+            child: const BottomNavScreen(),
+          ),
         );
       default:
         return MaterialPageRoute(
