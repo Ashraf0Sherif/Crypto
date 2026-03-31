@@ -1,3 +1,5 @@
+import 'package:crypto_app/core/helpers/extensions.dart';
+import 'package:crypto_app/core/routing/routes.dart';
 import 'package:crypto_app/core/widgets/app_text_form_field.dart';
 import 'package:crypto_app/features/auth/presentation/widgets/auth_toggle_button.dart';
 import 'package:crypto_app/features/auth/presentation/widgets/social_button.dart';
@@ -103,7 +105,13 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
               ),
-              AppButton(text: 'Sign in', onTap: () {}),
+              AppButton(
+                text: 'Sign in',
+                onTap: () => context.pushNamedAndRemoveUntil(
+                  Routes.home,
+                  predicate: (route) => false,
+                ),
+              ),
               const SizedBox(height: 10),
 
               Center(
