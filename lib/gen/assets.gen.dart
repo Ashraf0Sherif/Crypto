@@ -17,27 +17,27 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/onboarding1.png
+  /// File path: assets/images/logo.jpg
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.jpg');
+
+  /// File path: assets/images/onboarding1.jpg
   AssetGenImage get onboarding1 =>
-      const AssetGenImage('assets/images/onboarding1.png');
+      const AssetGenImage('assets/images/onboarding1.jpg');
 
-  /// File path: assets/images/onboarding2.png
+  /// File path: assets/images/onboarding2.jpg
   AssetGenImage get onboarding2 =>
-      const AssetGenImage('assets/images/onboarding2.png');
+      const AssetGenImage('assets/images/onboarding2.jpg');
 
-  /// File path: assets/images/onboarding3.png
+  /// File path: assets/images/onboarding3.jpg
   AssetGenImage get onboarding3 =>
-      const AssetGenImage('assets/images/onboarding3.png');
-
-  /// File path: assets/images/splash.png
-  AssetGenImage get splash => const AssetGenImage('assets/images/splash.png');
+      const AssetGenImage('assets/images/onboarding3.jpg');
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    logo,
     onboarding1,
     onboarding2,
     onboarding3,
-    splash,
   ];
 }
 
