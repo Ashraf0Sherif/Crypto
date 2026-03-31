@@ -1,6 +1,7 @@
-import 'package:crypto/core/theme/app_colors.dart';
+import 'package:crypto_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../gen/assets.gen.dart';
 import '../../../settings/presentation/screens/settings_screen.dart';
 import '../widgets/onboarding_item.dart';
 
@@ -15,21 +16,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<Map<String, String>> _pages = const [
+  final List<Map<String, String>> _pages = [
     {
-      'image': 'assets/images/onboarding1.png',
+      'image': Assets.images.onboarding1.path,
       'title': 'Trade anytime anywhere',
       'description':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
     },
     {
-      'image': 'assets/images/onboarding2.png',
+      'image': Assets.images.onboarding2.path,
       'title': 'Save and invest at the same time',
       'description':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
     },
     {
-      'image': 'assets/images/onboarding3.png',
+      'image': Assets.images.onboarding3.path,
       'title': 'Transact fast and easy',
       'description':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
