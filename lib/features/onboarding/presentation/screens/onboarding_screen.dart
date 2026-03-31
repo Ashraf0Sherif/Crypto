@@ -1,8 +1,9 @@
 import 'package:crypto_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../gen/assets.gen.dart';
-import '../../../settings/presentation/screens/settings_screen.dart';
 import '../widgets/onboarding_item.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -50,10 +51,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SettingsScreen()),
-      );
+      context.pushReplacementNamed(Routes.settings);
     }
   }
 
