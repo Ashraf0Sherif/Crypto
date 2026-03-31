@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/navigator_observer.dart';
 import 'core/routing/routes.dart';
+import 'core/theme/app_theme.dart';
 
 void main() {
   runApp(Crypto(appRouter: AppRouter()));
@@ -18,6 +19,7 @@ class Crypto extends StatelessWidget {
     return MaterialApp(
       title: 'Crypto App',
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.darkTheme,
       initialRoute: Routes.splash,
       onGenerateRoute: appRouter.onGenerateRoute,
       navigatorObservers: [CryptoNavigatorObserver()],

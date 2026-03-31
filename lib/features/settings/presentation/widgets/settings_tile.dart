@@ -23,7 +23,7 @@ class SettingsTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Row(
           children: [
-            Icon(icon, color: AppColors.secondary, size: 22),
+            Icon(icon, color: AppColors.primary, size: 22),
             const SizedBox(width: 14),
             Text(
               title,
@@ -36,12 +36,12 @@ class SettingsTile extends StatelessWidget {
             const Spacer(),
             Text(
               value,
-              style: const TextStyle(color: AppColors.lightGrey, fontSize: 13),
+              style: const TextStyle(color: AppColors.onSurfaceMuted, fontSize: 13),
             ),
             const SizedBox(width: 6),
             const Icon(
               Icons.arrow_forward_ios,
-              color: AppColors.lightGrey,
+              color: AppColors.onSurfaceMuted,
               size: 14,
             ),
           ],

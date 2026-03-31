@@ -1,5 +1,6 @@
-import 'package:crypto_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../core/theme/app_colors.dart';
 
 class OnboardingItem extends StatelessWidget {
   const OnboardingItem({
@@ -21,12 +22,35 @@ class OnboardingItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Spacer(flex: 2),
-          Image.asset(image, height: 280, fit: BoxFit.contain),
-          const SizedBox(height: 40),
+          Transform.rotate(
+            angle: 0.2,
+            child: Container(
+              height: 200,
+              width: 200,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.05),
+                borderRadius: BorderRadius.circular(16),
+                gradient: AppColors.primaryGradient,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primary.withValues(alpha: 0.1),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(image, height: 280, fit: BoxFit.cover),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
           Text(
             title,
             style: const TextStyle(
-              color: AppColors.white,
+              color: AppColors.onSurface,
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
@@ -36,7 +60,7 @@ class OnboardingItem extends StatelessWidget {
           Text(
             description,
             style: TextStyle(
-              color: AppColors.white.withValues(alpha: 0.6),
+              color: AppColors.onSurface.withValues(alpha: 0.6),
               fontSize: 14,
               height: 1.6,
             ),
