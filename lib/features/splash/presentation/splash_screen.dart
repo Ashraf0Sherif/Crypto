@@ -2,7 +2,8 @@ import 'package:crypto_app/core/theme/app_colors.dart';
 import 'package:crypto_app/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
-import '../../onboarding/presentation/screens/onboarding_screen.dart';
+import '../../../core/helpers/extensions.dart';
+import '../../../core/routing/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,9 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 2), () {
       if (!mounted) return;
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
-      );
+      context.pushReplacementNamed(Routes.onboarding);
     });
   }
 
