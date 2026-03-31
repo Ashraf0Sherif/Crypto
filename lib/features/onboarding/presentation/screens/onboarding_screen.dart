@@ -52,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      context.pushReplacementNamed(Routes.settings);
+      context.pushReplacementNamed(Routes.auth);
     }
   }
 
@@ -84,7 +84,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   TextButton(
                     onPressed: () =>
-                        context.pushReplacementNamed(Routes.settings),
+                        context.pushReplacementNamed(Routes.auth),
                     child: Text(
                       'Skip',
                       style: AppTextStyles.labelMd.copyWith(
