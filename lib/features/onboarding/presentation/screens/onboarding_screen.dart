@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_text_styles.dart';
 import '../../../../gen/assets.gen.dart';
 import '../widgets/onboarding_item.dart';
 
@@ -77,11 +78,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Crypto'),
+                  Text(
+                    'Crypto',
+                    style: AppTextStyles.displaySm.copyWith(fontSize: 18),
+                  ),
                   TextButton(
                     onPressed: () =>
                         context.pushReplacementNamed(Routes.settings),
-                    child: Text('Skip'),
+                    child: Text(
+                      'Skip',
+                      style: AppTextStyles.labelMd.copyWith(
+                        color: AppColors.primaryDim,
+                        letterSpacing: 3,
+                      ),
+                    ),
                   ),
                 ],
               ),
