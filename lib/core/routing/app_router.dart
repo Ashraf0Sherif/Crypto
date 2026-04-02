@@ -2,6 +2,7 @@ import 'package:crypto_app/features/bottom_nav/presentation/bottom_nav_screen.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/auth/logic/auth_cubit.dart';
 import '../../features/home/logic/home_cubit.dart';
 import '../di/dependency_injection.dart';
 
@@ -33,7 +34,10 @@ class AppRouter {
       case Routes.auth:
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => const AuthScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<AuthCubit>(),
+            child: const AuthScreen(),
+          ),
         );
       case Routes.nav:
         return MaterialPageRoute(

@@ -3,7 +3,9 @@ import 'package:crypto_app/core/theme/app_text_styles.dart';
 import 'package:crypto_app/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/di/dependency_injection.dart';
 import '../../../core/helpers/extensions.dart';
+import '../../../core/local/secure_storage_service.dart';
 import '../../../core/routing/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -37,10 +39,20 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 3), () {
-      if (!mounted) return;
+    _navigateAfterSplash();
+  }
+
+  Future<void> _navigateAfterSplash() async {
+    await Future.delayed(const Duration(seconds: 3));
+
+
+    final storageService = getIt<SecureStorageService>();
+    final isLoggedIn = await storageService.isLoggedIn();
+    if (isLoggedIn) {
+      context.pushReplacementNamed(Routes.nav);
+    } else {
       context.pushReplacementNamed(Routes.onboarding);
-    });
+    }
   }
 
   @override
