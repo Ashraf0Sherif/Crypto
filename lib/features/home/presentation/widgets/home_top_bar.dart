@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/helpers/extensions.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../gen/assets.gen.dart';
 import 'top_bar_icon_button.dart';
@@ -30,6 +32,11 @@ class HomeTopBar extends StatelessWidget {
           TopBarIconButton(image: Assets.svgs.scan.path, onTap: () {}),
           const SizedBox(width: 8),
           TopBarIconButton(image: Assets.svgs.notif.path, onTap: () {}),
+          const SizedBox(width: 8),
+          TopBarIconButton(
+            image: Assets.svgs.more.path,
+            onTap: () => context.pushNamed(Routes.settings),
+          ),
         ],
       ),
     );

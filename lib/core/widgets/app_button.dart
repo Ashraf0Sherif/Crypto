@@ -4,10 +4,11 @@ import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton({super.key, required this.text, required this.onTap});
+  const AppButton({super.key, required this.text, required this.onTap, required this.isLoading});
 
   final String text;
   final VoidCallback onTap;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +35,15 @@ class AppButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
           ),
-          child: Text(
-            text,
-            style: AppTextStyles.titleMd.copyWith(
-              color: AppColors.white,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+          child: isLoading
+              ? const CircularProgressIndicator()
+              : Text(
+                  text,
+                  style: AppTextStyles.titleMd.copyWith(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
         ),
       ),
     );

@@ -83,8 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     style: AppTextStyles.displaySm.copyWith(fontSize: 18),
                   ),
                   TextButton(
-                    onPressed: () =>
-                        context.pushReplacementNamed(Routes.auth),
+                    onPressed: () => context.pushReplacementNamed(Routes.auth),
                     child: Text(
                       'Skip',
                       style: AppTextStyles.labelMd.copyWith(

@@ -11,6 +11,8 @@ class AppTextFormField extends StatelessWidget {
     this.isPassword = false,
     this.isPasswordVisible = false,
     this.onToggleVisibility,
+    this.validator,
+    this.keyboardType = TextInputType.text,
   });
 
   final TextEditingController controller;
@@ -18,6 +20,8 @@ class AppTextFormField extends StatelessWidget {
   final bool isPassword;
   final bool isPasswordVisible;
   final VoidCallback? onToggleVisibility;
+  final String? Function(String?)? validator;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,8 @@ class AppTextFormField extends StatelessWidget {
       controller: controller,
       obscureText: isPassword && !isPasswordVisible,
       style: AppTextStyles.bodyMd.copyWith(color: AppColors.onSurface),
+      validator: validator,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: placeholder,
         hintStyle: AppTextStyles.bodyMd.copyWith(
