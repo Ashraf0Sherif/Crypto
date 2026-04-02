@@ -1,34 +1,45 @@
-import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../data/models/coin_model.dart';
 
 class CoinCard extends StatelessWidget {
-  const CoinCard({
-    super.key,
-    required this.value,
-    required this.pair,
-    required this.change,
-    required this.icon,
-    required this.isPositive,
-  });
+  const CoinCard({super.key, required this.coin});
 
-  final String value;
-  final String pair;
-  final String change;
-  final String icon;
-  final bool isPositive;
+  final CoinModel coin;
+
+  bool get isPositive => coin.priceChangePercentage24h >= 0;
+
+  String get formattedPrice {
+    if (coin.currentPrice >= 1000) {
+      return '\$${coin.currentPrice.toStringAsFixed(2).replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+\.)'), (m) => '${m[1]},')}';
+    }
+    return '\$${coin.currentPrice.toStringAsFixed(2)}';
+  }
+
+  String get formattedChange {
+    final sign = isPositive ? '+' : '';
+    return '$sign${coin.priceChangePercentage24h.toStringAsFixed(2)}%';
+  }
 
   List<FlSpot> _generateSpots() {
-    final random = Random(isPositive ? 42 : 99);
-    return List.generate(12, (i) {
-      final baseY = isPositive
-          ? 2 + (i / 11) * 4 + (random.nextDouble() - 0.5) * 1.5
-          : 6 - (i / 11) * 4 + (random.nextDouble() - 0.5) * 1.5;
-      return FlSpot(i.toDouble(), baseY.clamp(0.5, 7.5));
+    final prices = coin.sparklineIn7d.price;
+    if (prices.isEmpty) return [];
+    final data = prices.length > 24
+        ? prices.sublist(prices.length - 24)
+        : prices;
+    final minPrice = data.reduce((a, b) => a < b ? a : b);
+    final maxPrice = data.reduce((a, b) => a > b ? a : b);
+    final range = maxPrice - minPrice;
+
+    return List.generate(data.length, (i) {
+      final normalized = range == 0
+          ? 4.0
+          : ((data[i] - minPrice) / range) * 7 + 0.5;
+      return FlSpot(i.toDouble(), normalized);
     });
   }
 
@@ -48,7 +59,7 @@ class CoinCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            value,
+            formattedPrice,
             style: AppTextStyles.titleMd.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
@@ -62,13 +73,28 @@ class CoinCard extends StatelessWidget {
                   color: AppColors.surfaceContainer,
                 ),
                 child: ClipOval(
-                  child: SvgPicture.asset(icon, width: 24, height: 24),
+                  child: CachedNetworkImage(
+                    imageUrl: coin.image,
+                    width: 24,
+                    height: 24,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: SizedBox.shrink(),
+                    ),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.currency_bitcoin,
+                      size: 16,
+                      color: AppColors.onSurfaceVariant,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  pair,
+                  '${coin.symbol.toUpperCase()}/USD',
                   style: AppTextStyles.labelSm.copyWith(
                     color: AppColors.onSurfaceVariant,
                   ),
@@ -79,7 +105,7 @@ class CoinCard extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            change,
+            formattedChange,
             style: AppTextStyles.labelSm.copyWith(
               color: chartColor,
               fontWeight: FontWeight.w600,
