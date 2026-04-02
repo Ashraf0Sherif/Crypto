@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 
-class ActionCard extends StatelessWidget {
-  const ActionCard({
+class ActionCardItem extends StatelessWidget {
+  const ActionCardItem({
     super.key,
     required this.icon,
     required this.title,

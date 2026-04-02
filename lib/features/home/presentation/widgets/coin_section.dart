@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
-import '../../data/models/coin_data.dart';
+import '../../data/models/coin_model.dart';
 import 'coin_card.dart';
 
 class CoinSection extends StatelessWidget {
   const CoinSection({super.key, required this.title, required this.coins});
 
   final String title;
-  final List<CoinData> coins;
+  final List<CoinModel> coins;
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +43,7 @@ class CoinSection extends StatelessWidget {
             itemCount: coins.length,
             separatorBuilder: (_, _) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
-              final coin = coins[index];
-              return CoinCard(
-                value: coin.value,
-                pair: coin.pair,
-                change: coin.change,
-                icon: coin.icon,
-                isPositive: coin.isPositive,
-              );
+              return CoinCard(coin: coins[index]);
             },
           ),
         ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/theme/app_colors.dart';
 import '../../../gen/assets.gen.dart';
 import '../../home/presentation/screens/home_screen.dart';
 
-enum NavigationTab { home, markets, trades, activity, wallets }
 
 enum NavItemType {
   home,
@@ -45,11 +45,24 @@ enum NavItemType {
 
   Widget get screen {
     switch (this) {
-      case NavItemType.home: return const HomeScreen();
-      case NavItemType.markets: return const Center(child: Text('Markets', style: TextStyle(color: Colors.white)));
-      case NavItemType.trades: return const Center(child: Text('Trades', style: TextStyle(color: Colors.white)));
-      case NavItemType.activity: return const Center(child: Text('Activity', style: TextStyle(color: Colors.white)));
-      case NavItemType.wallets: return const Center(child: Text('Wallets', style: TextStyle(color: Colors.white)));
+      case NavItemType.home:
+        return const HomeScreen();
+      case NavItemType.markets:
+        return const Center(
+          child: Text('Markets', style: TextStyle(color: AppColors.white)),
+        );
+      case NavItemType.trades:
+        return const Center(
+          child: Text('Trades', style: TextStyle(color: AppColors.white)),
+        );
+      case NavItemType.activity:
+        return const Center(
+          child: Text('Activity', style: TextStyle(color: AppColors.white)),
+        );
+      case NavItemType.wallets:
+        return const Center(
+          child: Text('Wallets', style: TextStyle(color: AppColors.white)),
+        );
     }
   }
 }
