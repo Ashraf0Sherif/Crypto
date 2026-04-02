@@ -38,7 +38,6 @@ class LottieLoader extends StatelessWidget {
             width: 160,
             height: 160,
             fit: BoxFit.contain,
-            // إضافة الكاش بتساعد أحياناً في تقليل مشاكل الرندر
             renderCache: RenderCache.drawingCommands,
             delegates: LottieDelegates(
               values: [
@@ -47,10 +46,9 @@ class LottieLoader extends StatelessWidget {
                   'Fill 1',
                   '**',
                 ], value: AppColors.primary),
-                // تعديل الشفافية (Opacity)
                 ValueDelegate.opacity(
                   const ['**', 'Fill 1', '**'],
-                  value: 127, // الرقم ده يمثل 50% شفافية (نص الـ 255)
+                  value: 127,
                 ),  
               ],
             ),
