@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/auth/logic/auth_cubit.dart';
+import '../../features/coin_details/logic/coin_details_cubit.dart';
+import '../../features/coin_details/presentation/screens/coin_details_screen.dart';
 import '../../features/home/logic/home_cubit.dart';
 import '../di/dependency_injection.dart';
 
@@ -52,6 +54,15 @@ class AppRouter {
             child: const BottomNavScreen(),
           ),
         );
+      case Routes.coinDetails:
+        final coinId = settings.arguments as String;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<CoinDetailsCubit>()..getCoinData(coinId: coinId),
+            child: CoinDetailsScreen(coinId: coinId),
+          ),
+        );
       default:
         return MaterialPageRoute(
           settings: settings,
@@ -61,3 +72,4 @@ class AppRouter {
     }
   }
 }
+

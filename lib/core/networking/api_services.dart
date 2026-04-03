@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import '../../features/coin_details/data/models/coin_chart_model.dart';
+import '../../features/coin_details/data/models/coin_details_model.dart';
 import '../../features/home/data/models/coin_model.dart';
 import 'api_constants.dart';
 
@@ -27,5 +29,40 @@ class ApiServices {
     return (response.data as List)
         .map((json) => CoinModel.fromJson(json as Map<String, dynamic>))
         .toList();
+  }
+
+  Future<CoinDetailsModel> getCoinDetails({required String coinId}) async {
+    final response = await _dio.get(
+      'coins/$coinId',
+      queryParameters: {
+        'localization': false,
+        'tickers': false,
+        'community_data': false,
+        'developer_data': false,
+        'sparkline': false,
+      },
+    );
+
+    return CoinDetailsModel.fromJson(
+      response.data as Map<String, dynamic>,
+    );
+  }
+
+  Future<CoinChartModel> getCoinChart({
+    required String coinId,
+    int days = 1,
+    String vsCurrency = 'usd',
+  }) async {
+    final response = await _dio.get(
+      'coins/$coinId/market_chart',
+      queryParameters: {
+        'vs_currency': vsCurrency,
+        'days': days,
+      },
+    );
+
+    return CoinChartModel.fromJson(
+      response.data as Map<String, dynamic>,
+    );
   }
 }
