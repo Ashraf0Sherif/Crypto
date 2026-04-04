@@ -7,6 +7,8 @@ import '../../features/coin_details/data/repos/coin_details_repo.dart';
 import '../../features/coin_details/logic/coin_details_cubit.dart';
 import '../../features/home/data/repos/home_repo.dart';
 import '../../features/home/logic/home_cubit.dart';
+import '../../features/search/data/repos/search_repo.dart';
+import '../../features/search/logic/search_cubit.dart';
 import '../local/hive/hive_service.dart';
 import '../local/secure_storage_service.dart';
 import '../networking/api_services.dart';
@@ -42,5 +44,9 @@ Future<void> setupGetIt() async {
   // Auth
   getIt.registerLazySingleton<AuthRepo>(() => AuthRepo(getIt()));
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt()));
+
+  // Search
+  getIt.registerLazySingleton<SearchRepo>(() => SearchRepo(getIt(), getIt()));
+  getIt.registerFactory<SearchCubit>(() => SearchCubit(getIt()));
 }
 

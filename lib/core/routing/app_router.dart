@@ -6,6 +6,7 @@ import '../../features/auth/logic/auth_cubit.dart';
 import '../../features/coin_details/logic/coin_details_cubit.dart';
 import '../../features/coin_details/presentation/screens/coin_details_screen.dart';
 import '../../features/home/logic/home_cubit.dart';
+import '../../features/search/logic/search_cubit.dart';
 import '../di/dependency_injection.dart';
 
 import '../../features/bottom_nav/logic/bottom_nav_cubit.dart';
@@ -49,6 +50,9 @@ class AppRouter {
               BlocProvider(create: (context) => BottomNavCubit()),
               BlocProvider(
                 create: (context) => getIt<HomeCubit>()..getCoinsMarkets(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<SearchCubit>()..loadSearchHistory(),
               ),
             ],
             child: const BottomNavScreen(),

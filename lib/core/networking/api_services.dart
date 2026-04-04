@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import '../../features/coin_details/data/models/coin_chart_model.dart';
 import '../../features/coin_details/data/models/coin_details_model.dart';
 import '../../features/home/data/models/coin_model.dart';
+import '../../features/search/data/model/search_model.dart';
 import 'api_constants.dart';
 
 class ApiServices {
@@ -43,9 +44,7 @@ class ApiServices {
       },
     );
 
-    return CoinDetailsModel.fromJson(
-      response.data as Map<String, dynamic>,
-    );
+    return CoinDetailsModel.fromJson(response.data as Map<String, dynamic>);
   }
 
   Future<CoinChartModel> getCoinChart({
@@ -55,14 +54,19 @@ class ApiServices {
   }) async {
     final response = await _dio.get(
       'coins/$coinId/market_chart',
-      queryParameters: {
-        'vs_currency': vsCurrency,
-        'days': days,
-      },
+      queryParameters: {'vs_currency': vsCurrency, 'days': days},
     );
 
-    return CoinChartModel.fromJson(
-      response.data as Map<String, dynamic>,
+    return CoinChartModel.fromJson(response.data as Map<String, dynamic>);
+  }
+
+  Future<List<SearchCoinModel>> searchCoins(String query) async {
+    final response = await _dio.get(
+      'search',
+      queryParameters: {'query': query},
     );
+    return (response.data['coins'] as List)
+        .map((json) => SearchCoinModel.fromJson(json))
+        .toList();
   }
 }
