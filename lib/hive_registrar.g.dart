@@ -3,18 +3,34 @@
 // Check in to version control
 
 import 'package:hive_ce/hive_ce.dart';
+import 'package:crypto_app/features/coin_details/data/models/coin_chart_model.dart';
+import 'package:crypto_app/features/coin_details/data/models/coin_details_model.dart';
 import 'package:crypto_app/features/home/data/models/coin_model.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
+    registerAdapter(ChartDataPointAdapter());
+    registerAdapter(CoinChartModelAdapter());
+    registerAdapter(CoinDescriptionModelAdapter());
+    registerAdapter(CoinDetailsModelAdapter());
+    registerAdapter(CoinImageModelAdapter());
     registerAdapter(CoinModelAdapter());
+    registerAdapter(CurrencyValueModelAdapter());
+    registerAdapter(MarketDataModelAdapter());
     registerAdapter(SparklineDataAdapter());
   }
 }
 
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
+    registerAdapter(ChartDataPointAdapter());
+    registerAdapter(CoinChartModelAdapter());
+    registerAdapter(CoinDescriptionModelAdapter());
+    registerAdapter(CoinDetailsModelAdapter());
+    registerAdapter(CoinImageModelAdapter());
     registerAdapter(CoinModelAdapter());
+    registerAdapter(CurrencyValueModelAdapter());
+    registerAdapter(MarketDataModelAdapter());
     registerAdapter(SparklineDataAdapter());
   }
 }
