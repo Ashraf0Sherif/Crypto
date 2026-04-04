@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../gen/assets.gen.dart';
 import '../../home/presentation/screens/home_screen.dart';
-
+import '../../search/presentation/screens/search_screen.dart';
 
 enum NavItemType {
   home,
-  markets,
+  search,
   trades,
   activity,
   wallets;
@@ -17,8 +17,8 @@ enum NavItemType {
     switch (this) {
       case NavItemType.home:
         return 'Home';
-      case NavItemType.markets:
-        return 'Markets';
+      case NavItemType.search:
+        return 'Search';
       case NavItemType.trades:
         return 'Trades';
       case NavItemType.activity:
@@ -32,8 +32,8 @@ enum NavItemType {
     switch (this) {
       case NavItemType.home:
         return Assets.svgs.home.path;
-      case NavItemType.markets:
-        return Assets.svgs.market.path;
+      case NavItemType.search:
+        return Assets.svgs.search.path;
       case NavItemType.trades:
         return Assets.svgs.trades.path;
       case NavItemType.activity:
@@ -47,10 +47,8 @@ enum NavItemType {
     switch (this) {
       case NavItemType.home:
         return const HomeScreen();
-      case NavItemType.markets:
-        return const Center(
-          child: Text('Markets', style: TextStyle(color: AppColors.white)),
-        );
+      case NavItemType.search:
+        return const SearchScreen();
       case NavItemType.trades:
         return const Center(
           child: Text('Trades', style: TextStyle(color: AppColors.white)),
