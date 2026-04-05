@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -23,12 +24,15 @@ class SearchResultCard extends StatelessWidget {
             bottom: -20,
             child: Opacity(
               opacity: 0.05,
-              child: Image.network(
-                coin.large,
+              child: CachedNetworkImage(
+                imageUrl: coin.large,
                 width: 100,
                 height: 100,
-                errorBuilder: (context, error, stackTrace) =>
-                    const SizedBox.shrink(),
+                placeholder: (context, url) => const Center(
+                  child: SizedBox(),
+                ),
+                errorWidget: (context, url, error) =>
+                    const Icon(Icons.error),
               ),
             ),
           ),

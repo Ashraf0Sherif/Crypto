@@ -7,6 +7,7 @@ import '../../features/coin_details/logic/coin_details_cubit.dart';
 import '../../features/coin_details/presentation/screens/coin_details_screen.dart';
 import '../../features/home/logic/home_cubit.dart';
 import '../../features/search/logic/search_cubit.dart';
+import '../../features/trending/logic/trending_cubit.dart';
 import '../di/dependency_injection.dart';
 
 import '../../features/bottom_nav/logic/bottom_nav_cubit.dart';
@@ -53,6 +54,9 @@ class AppRouter {
               ),
               BlocProvider(
                 create: (context) => getIt<SearchCubit>()..loadSearchHistory(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<TrendingCubit>()..getTrendingCoins(),
               ),
             ],
             child: const BottomNavScreen(),

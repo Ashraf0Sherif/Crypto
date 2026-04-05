@@ -5,11 +5,12 @@ import '../../../core/theme/app_colors.dart';
 import '../../../gen/assets.gen.dart';
 import '../../home/presentation/screens/home_screen.dart';
 import '../../search/presentation/screens/search_screen.dart';
+import '../../trending/presentation/screens/trending_screen.dart';
 
 enum NavItemType {
   home,
   search,
-  trades,
+  trending,
   activity,
   wallets;
 
@@ -19,8 +20,8 @@ enum NavItemType {
         return 'Home';
       case NavItemType.search:
         return 'Search';
-      case NavItemType.trades:
-        return 'Trades';
+      case NavItemType.trending:
+        return 'Trending';
       case NavItemType.activity:
         return 'Activity';
       case NavItemType.wallets:
@@ -34,7 +35,7 @@ enum NavItemType {
         return Assets.svgs.home.path;
       case NavItemType.search:
         return Assets.svgs.search.path;
-      case NavItemType.trades:
+      case NavItemType.trending:
         return Assets.svgs.trades.path;
       case NavItemType.activity:
         return Assets.svgs.activity.path;
@@ -49,10 +50,8 @@ enum NavItemType {
         return const HomeScreen();
       case NavItemType.search:
         return const SearchScreen();
-      case NavItemType.trades:
-        return const Center(
-          child: Text('Trades', style: TextStyle(color: AppColors.white)),
-        );
+      case NavItemType.trending:
+        return const TrendingScreen();
       case NavItemType.activity:
         return const Center(
           child: Text('Activity', style: TextStyle(color: AppColors.white)),

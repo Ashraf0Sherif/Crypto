@@ -4,6 +4,7 @@ import '../../features/coin_details/data/models/coin_chart_model.dart';
 import '../../features/coin_details/data/models/coin_details_model.dart';
 import '../../features/home/data/models/coin_model.dart';
 import '../../features/search/data/model/search_model.dart';
+import '../../features/trending/data/model/trending_model.dart';
 import 'api_constants.dart';
 
 class ApiServices {
@@ -67,6 +68,13 @@ class ApiServices {
     );
     return (response.data['coins'] as List)
         .map((json) => SearchCoinModel.fromJson(json))
+        .toList();
+  }
+
+  Future<List<TrendingCoinModel>> getTrendingCoins() async {
+    final response = await _dio.get('search/trending');
+    return (response.data['coins'] as List)
+        .map((json) => TrendingCoinModel.fromJson(json['item']))
         .toList();
   }
 }
