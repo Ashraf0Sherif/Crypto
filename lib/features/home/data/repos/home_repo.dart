@@ -1,6 +1,8 @@
 import '../../../../core/local/hive/hive_service.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_services.dart';
+import '../../../../core/networking/api_error.dart';
+import 'package:dio/dio.dart';
 import '../models/coin_model.dart';
 
 class HomeRepo {
@@ -29,7 +31,10 @@ class HomeRepo {
       if (cachedData != null && cachedData.isNotEmpty) {
         return Success(cachedData);
       }
-      return Failure('Unable to fetch data. Please check your connection.');
+      if (e is DioException) {
+        return Failure(ServerFailure.fromDioError(e).errMessages);
+      }
+      return Failure(e.toString());
     }
   }
 }

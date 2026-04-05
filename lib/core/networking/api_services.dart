@@ -17,11 +17,13 @@ class ApiServices {
     int perPage = 20,
     int page = 1,
     bool sparkline = true,
+    String? ids,
   }) async {
     final response = await _dio.get(
       ApiConstants.coinsMarkets,
       queryParameters: {
         'vs_currency': vsCurrency,
+        'ids': ids,
         'per_page': perPage,
         'page': page,
         'sparkline': sparkline,

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/theme/app_colors.dart';
+
 import '../../../gen/assets.gen.dart';
 import '../../home/presentation/screens/home_screen.dart';
 import '../../search/presentation/screens/search_screen.dart';
 import '../../trending/presentation/screens/trending_screen.dart';
+import '../../favorite/presentation/screens/favorites_screen.dart';
 
 enum NavItemType {
   home,
   search,
   trending,
-  wallets;
+  favorites;
 
   String get label {
     switch (this) {
@@ -21,8 +22,8 @@ enum NavItemType {
         return 'Search';
       case NavItemType.trending:
         return 'Trending';
-      case NavItemType.wallets:
-        return 'Wallets';
+      case NavItemType.favorites:
+        return 'Favorites';
     }
   }
 
@@ -34,8 +35,8 @@ enum NavItemType {
         return Assets.svgs.search.path;
       case NavItemType.trending:
         return Assets.svgs.trades.path;
-      case NavItemType.wallets:
-        return Assets.svgs.wallet.path;
+      case NavItemType.favorites:
+        return Assets.svgs.star.path;
     }
   }
 
@@ -47,10 +48,8 @@ enum NavItemType {
         return const SearchScreen();
       case NavItemType.trending:
         return const TrendingScreen();
-      case NavItemType.wallets:
-        return const Center(
-          child: Text('Wallets', style: TextStyle(color: AppColors.white)),
-        );
+      case NavItemType.favorites:
+        return const FavoritesScreen();
     }
   }
 }

@@ -9,6 +9,7 @@ class HiveService {
   static const String _coinDetailsBoxName = 'coin_details_box';
   static const String _coinChartsBoxName = 'coin_charts_box';
   static const String _searchHistoryBoxName = 'search_history_box';
+  static const String _favoritesBoxName = 'favorites_box';
 
   Future<void> saveCoins(List<CoinModel> coins) async {
     final box = await Hive.openBox<List>(_coinsBoxName);
@@ -83,5 +84,22 @@ class HiveService {
   Future<void> clearSearchHistory() async {
     final box = await Hive.openBox<String>(_searchHistoryBoxName);
     await box.clear();
+  }
+
+  Future<void> toggleFavorite(String coinId) async {
+    final box = await Hive.openBox<String>(_favoritesBoxName);
+    final isFavorite = box.values.contains(coinId);
+
+    if (isFavorite) {
+      final key = box.keys.firstWhere((k) => box.get(k) == coinId);
+      await box.delete(key);
+    } else {
+      await box.add(coinId);
+    }
+  }
+
+  Future<List<String>> getFavoriteIds() async {
+    final box = await Hive.openBox<String>(_favoritesBoxName);
+    return box.values.toList();
   }
 }

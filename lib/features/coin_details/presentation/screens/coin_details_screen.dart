@@ -2,13 +2,17 @@ import 'package:crypto_app/features/coin_details/presentation/widgets/stats_grid
 import 'package:crypto_app/features/coin_details/presentation/widgets/timeframe_filters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/helpers/extensions.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/widgets/lottie_loader.dart';
 import '../../logic/coin_details_cubit.dart';
 import '../../logic/coin_details_state.dart';
+import '../../../favorite/logic/favorites_cubit.dart';
+import '../../../favorite/logic/favorites_state.dart';
 import '../widgets/about_section.dart';
 import '../widgets/coin_chart.dart';
 import '../widgets/coin_header.dart';
@@ -29,12 +33,24 @@ class CoinDetailsScreen extends StatelessWidget {
           onPressed: () => context.pop(),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.star_border,
-              color: AppColors.secondaryFixedDim,
-            ),
-            onPressed: () {},
+          BlocBuilder<FavoritesCubit, FavoritesState>(
+            builder: (context, state) {
+              final isFav = context.read<FavoritesCubit>().isFavorite(coinId);
+              return IconButton(
+                icon: SvgPicture.asset(
+                  isFav ? Assets.svgs.starFilled.path : Assets.svgs.star.path,
+                  width: 24,
+                  height: 24,
+                  colorFilter: ColorFilter.mode(
+                    isFav ? AppColors.tertiary : AppColors.secondaryFixedDim,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                onPressed: () {
+                  context.read<FavoritesCubit>().toggleFavorite(coinId);
+                },
+              );
+            },
           ),
         ],
       ),
