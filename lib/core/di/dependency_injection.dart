@@ -11,6 +11,8 @@ import '../../features/search/data/repos/search_repo.dart';
 import '../../features/search/logic/search_cubit.dart';
 import '../../features/trending/data/repo/trending_repo.dart';
 import '../../features/trending/logic/trending_cubit.dart';
+import '../../features/favorite/data/repos/favorites_repo.dart';
+import '../../features/favorite/logic/favorites_cubit.dart';
 import '../local/hive/hive_service.dart';
 import '../local/secure_storage_service.dart';
 import '../networking/api_services.dart';
@@ -54,5 +56,9 @@ Future<void> setupGetIt() async {
   // Trending
   getIt.registerLazySingleton<TrendingRepo>(() => TrendingRepo(getIt()));
   getIt.registerFactory<TrendingCubit>(() => TrendingCubit(getIt())..getTrendingCoins());
+
+  // Favorites
+  getIt.registerLazySingleton<FavoritesRepo>(() => FavoritesRepo(getIt(), getIt()));
+  getIt.registerLazySingleton<FavoritesCubit>(() => FavoritesCubit(getIt())..loadFavorites());
 }
 

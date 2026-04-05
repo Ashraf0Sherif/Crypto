@@ -8,6 +8,7 @@ import '../../features/coin_details/presentation/screens/coin_details_screen.dar
 import '../../features/home/logic/home_cubit.dart';
 import '../../features/search/logic/search_cubit.dart';
 import '../../features/trending/logic/trending_cubit.dart';
+import '../../features/favorite/logic/favorites_cubit.dart';
 import '../di/dependency_injection.dart';
 
 import '../../features/bottom_nav/logic/bottom_nav_cubit.dart';
@@ -58,6 +59,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => getIt<TrendingCubit>()..getTrendingCoins(),
               ),
+              BlocProvider(
+                create: (context) => getIt<FavoritesCubit>(),
+              ),
             ],
             child: const BottomNavScreen(),
           ),
@@ -66,8 +70,15 @@ class AppRouter {
         final coinId = settings.arguments as String;
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<CoinDetailsCubit>()..getCoinData(coinId: coinId),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<CoinDetailsCubit>()..getCoinData(coinId: coinId),
+              ),
+              BlocProvider.value(
+                value: getIt<FavoritesCubit>(),
+              ),
+            ],
             child: CoinDetailsScreen(coinId: coinId),
           ),
         );

@@ -160,6 +160,10 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/Star.svg
   SvgGenImage get star => const SvgGenImage('assets/svgs/Star.svg');
 
+  /// File path: assets/svgs/Star_filled.svg
+  SvgGenImage get starFilled =>
+      const SvgGenImage('assets/svgs/Star_filled.svg');
+
   /// File path: assets/svgs/Status (SNT).svg
   SvgGenImage get statusSNT =>
       const SvgGenImage('assets/svgs/Status (SNT).svg');
@@ -205,6 +209,7 @@ class $AssetsSvgsGen {
     search,
     solanaSOL,
     star,
+    starFilled,
     statusSNT,
     trades,
     wallet,

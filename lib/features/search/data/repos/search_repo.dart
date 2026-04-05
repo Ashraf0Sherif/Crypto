@@ -1,6 +1,8 @@
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_services.dart';
 import '../../../../core/local/hive/hive_service.dart';
+import '../../../../core/networking/api_error.dart';
+import 'package:dio/dio.dart';
 import '../model/search_model.dart';
 
 class SearchRepo {
@@ -14,7 +16,10 @@ class SearchRepo {
       final response = await _apiServices.searchCoins(query);
       return Success(response);
     } catch (e) {
-      return Failure('Search failed. Please try again.');
+      if (e is DioException) {
+        return Failure(ServerFailure.fromDioError(e).errMessages);
+      }
+      return Failure(e.toString());
     }
   }
 

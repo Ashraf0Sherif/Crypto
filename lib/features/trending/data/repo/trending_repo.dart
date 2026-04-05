@@ -1,5 +1,7 @@
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_services.dart';
+import '../../../../core/networking/api_error.dart';
+import 'package:dio/dio.dart';
 import '../model/trending_model.dart';
 
 class TrendingRepo {
@@ -12,7 +14,10 @@ class TrendingRepo {
       final response = await _apiServices.getTrendingCoins();
       return Success(response);
     } catch (e) {
-      return Failure('Failed to load trending coins. Please try again.');
+      if (e is DioException) {
+        return Failure(ServerFailure.fromDioError(e).errMessages);
+      }
+      return Failure('Something went wrong. Please try again.');
     }
   }
 }

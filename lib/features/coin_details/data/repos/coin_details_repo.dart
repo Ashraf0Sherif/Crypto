@@ -1,6 +1,8 @@
 import '../../../../core/local/hive/hive_service.dart';
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_services.dart';
+import '../../../../core/networking/api_error.dart';
+import 'package:dio/dio.dart';
 import '../models/coin_chart_model.dart';
 import '../models/coin_details_model.dart';
 
@@ -20,7 +22,10 @@ class CoinDetailsRepo {
       if (cachedData != null) {
         return Success(cachedData, isOffline: true); 
       }
-      return Failure('Unable to fetch coin details. Please check your connection.');
+      if (e is DioException) {
+        return Failure(ServerFailure.fromDioError(e).errMessages);
+      }
+      return Failure('Something went wrong. Please try again.');
     }
   }
 
@@ -42,7 +47,10 @@ class CoinDetailsRepo {
       if (cachedData != null) {
         return Success(cachedData, isOffline: true); 
       }
-      return Failure('Unable to fetch chart data. Please check your connection.');
+      if (e is DioException) {
+        return Failure(ServerFailure.fromDioError(e).errMessages);
+      }
+      return Failure('Something went wrong. Please try again.');
     }
   }
 }

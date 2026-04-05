@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../core/routing/routes.dart';
+import '../../../../core/helpers/extensions.dart';
+
 import '../../../../core/helpers/formatting_extensions.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
@@ -23,8 +26,12 @@ class TrendingCoinCard extends StatelessWidget {
     final isPositive = priceChange >= 0;
     final trendColor = isPositive ? AppColors.tertiary : AppColors.error;
 
-    return Stack(
-      children: [
+    return GestureDetector(
+      onTap: () {
+        context.pushNamed(Routes.coinDetails, arguments: coin.id);
+      },
+      child: Stack(
+        children: [
         Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
@@ -172,8 +179,9 @@ class TrendingCoinCard extends StatelessWidget {
             ),
           ),
       ],
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildBottomStat(String label, String value) {
     return Column(
