@@ -11,7 +11,6 @@ enum NavItemType {
   home,
   search,
   trending,
-  activity,
   wallets;
 
   String get label {
@@ -22,8 +21,6 @@ enum NavItemType {
         return 'Search';
       case NavItemType.trending:
         return 'Trending';
-      case NavItemType.activity:
-        return 'Activity';
       case NavItemType.wallets:
         return 'Wallets';
     }
@@ -37,8 +34,6 @@ enum NavItemType {
         return Assets.svgs.search.path;
       case NavItemType.trending:
         return Assets.svgs.trades.path;
-      case NavItemType.activity:
-        return Assets.svgs.activity.path;
       case NavItemType.wallets:
         return Assets.svgs.wallet.path;
     }
@@ -52,10 +47,6 @@ enum NavItemType {
         return const SearchScreen();
       case NavItemType.trending:
         return const TrendingScreen();
-      case NavItemType.activity:
-        return const Center(
-          child: Text('Activity', style: TextStyle(color: AppColors.white)),
-        );
       case NavItemType.wallets:
         return const Center(
           child: Text('Wallets', style: TextStyle(color: AppColors.white)),
